@@ -22,6 +22,18 @@ knit        : slidify::knit2slides
 
 ## Slide 3
 
+
+
+
+
+```r
+unique(as.character(address$District))
+```
+
+```
+## character(0)
+```
+
 --- .class
 
 ## Slide 4
