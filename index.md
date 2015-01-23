@@ -31,5 +31,6 @@ knit        : slidify::knit2slides
 
 ## Slide 5
 
+### Check it out: [https://jeremyshantz.shinyapps.io/waterloo/](https://jeremyshantz.shinyapps.io/waterloo/)
 
 kerbam!
