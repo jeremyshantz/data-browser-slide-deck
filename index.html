@@ -47,14 +47,20 @@
     <!-- SLIDES -->
     <slide class="" id="slide-1" style="background:;">
   <hgroup>
-    <h2>Read-And-Delete</h2>
+    <h2>Waterloo Neighbourhood Browser</h2>
   </hgroup>
   <article data-timings="">
-    <ol>
-<li>Edit YAML front matter</li>
-<li>Write using R Markdown</li>
-<li>Use an empty line followed by three dashes to separate slides!</li>
-</ol>
+    <p>Welcome to Waterloo, ON!</p>
+
+<ul>
+<li>View local city geo data. </li>
+<li>Browse through the city&#39;s wards and neighbourhoods </li>
+<li>See a random sample of addresses plotted on the map</li>
+<li>Adjust the slider to control the sample size. </li>
+<li>Get tabular data checking the box.</li>
+</ul>
+
+<p><img src='assets/img/screenshot.png' /></p>
 
   </article>
   <!-- Presenter Notes -->
@@ -62,13 +68,29 @@
 
 <slide class="class" id="id" style="background:;">
   <hgroup>
-    <h2>Slide 3</h2>
+    <h2>Open Data</h2>
   </hgroup>
   <article data-timings="">
-    <pre><code class="r">unique(as.character(address$District))
+    <p>Our application uses the AddressPoints dataset from the <a href="http://www.waterloo.ca/en/opendata">City of Waterloo</a> (Contains information provided by the City of Waterloo under licence).</p>
+
+<h3>Neighbourhoods</h3>
+
+<pre><code class="r">head(unique(as.character(addresses$DISTRICT)))
 </code></pre>
 
-<pre><code>## character(0)
+<pre><code>## [1] &quot;Lakeshore North&quot; &quot;Beechwood&quot;       &quot;Lakeshore&quot;       &quot;Central&quot;        
+## [5] &quot;Eastbridge&quot;      &quot;Lexington&quot;
+</code></pre>
+
+<h3>Geographic data</h3>
+
+<pre><code class="r">head(addresses[1:3, 3:7])
+</code></pre>
+
+<pre><code>##         STREET_NM WARD        DISTRICT LATITUDE LONGITUDE
+## 1    NORTHLAKE DR    3 Lakeshore North 43.49750 -80.55109
+## 2     OLD POST RD    6       Beechwood 43.46723 -80.55597
+## 3 HUNTINGDON CRES    3       Lakeshore 43.49245 -80.55677
 </code></pre>
 
   </article>
@@ -77,22 +99,41 @@
 
 <slide class="class" id="slide-3" style="background:;">
   <hgroup>
-    <h2>Slide 4</h2>
+    <h2>Random Sample of Addresses</h2>
   </hgroup>
   <article data-timings="">
-    
+    <p>A random sample of addresses in the selected neighbourhood are taken based on user input. Notice how the neighbourhood&#39;s boundaries are very clear even with a small sample size (above a certain point).</p>
+
+<pre><code class="r">    input.district &lt;- &#39;Beechwood&#39; # user inputs
+    input.samplesize &lt;- 400 
+
+    neighbourhood &lt;- addresses[addresses$DISTRICT == input.district,] # filter neighbourhood
+    population &lt;- nrow(neighbourhood)
+
+    sample.indexes &lt;- sample(1:population, input.samplesize) # random sample
+    neighbourhood &lt;- neighbourhood[sample.indexes, ] # filter sample
+</code></pre>
+
+<h3>Sampling 400 of 2770 addresses in the neighbourhood</h3>
+
   </article>
   <!-- Presenter Notes -->
 </slide>
 
 <slide class="class" id="slide-4" style="background:;">
   <hgroup>
-    <h2>Slide 5</h2>
+    <h2>R and Shiny</h2>
   </hgroup>
   <article data-timings="">
-    <h3>Check it out: <a href="https://jeremyshantz.shinyapps.io/waterloo/">https://jeremyshantz.shinyapps.io/waterloo/</a></h3>
+    <p><br/></p>
 
-<p>kerbam!</p>
+<div>
+Made with R and <span style="font-face:Source Sans Pro;">Shiny</span> and RStudio and Git and Google and Caffo and Peng and all the package makers. Kerbam!
+<img src='assets/img/rlogo.jpg' /></div>
+
+<h3>Check it out: <a href="https://jeremyshantz.shinyapps.io/waterloo/">Waterloo Neighbourhood Browser</a></h3>
+
+<h3>Created for the Johns Hopkins <a href="https://www.coursera.org/course/devdataprod">Developing Data Products course</a> on Coursera.</h3>
 
   </article>
   <!-- Presenter Notes -->
@@ -104,25 +145,25 @@
     <ul>
       <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=1 title='Read-And-Delete'>
+        data-slide=1 title='Waterloo Neighbourhood Browser'>
          1
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=2 title='Slide 3'>
+        data-slide=2 title='Open Data'>
          2
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=3 title='Slide 4'>
+        data-slide=3 title='Random Sample of Addresses'>
          3
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=4 title='Slide 5'>
+        data-slide=4 title='R and Shiny'>
          4
       </a>
     </li>
